@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PyTorch Concepts — Interactive Demo</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text y='14' font-size='14'>🔥</text></svg>" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <header>
+    <h1>PyTorch Concepts &mdash; Interactive Demo</h1>
+    <p>A hands-on simulator to visualise Tensors, Embeddings (RAG), and Neural Network training loops.</p>
+    <div class="simulated-badge">Simulated in Javascript &bull; Offline Ready &bull; No Python Backend Required</div>
+  </header>
+
+  <main>
+    <!-- Top Navigation / Tab Selector -->
+    <nav class="tab-nav">
+      <button class="tab-btn active" data-tab="tab-intro">1. PyTorch Trilogy</button>
+      <button class="tab-btn" data-tab="tab-embeddings">2. Embeddings &amp; RAG</button>
+      <button class="tab-btn" data-tab="tab-nn">3. NN Training Loop</button>
+    </nav>
+
+    <!-- Tab 1: PyTorch Trilogy / Intro -->
+    <div id="tab-intro" class="tab-panel active">
+      <div class="glass-card">
+        <h2>The Core Elements of PyTorch</h2>
+        <p style="color: var(--text-muted); margin-bottom: 1.5rem;">
+          PyTorch translates complex mathematical concepts into clean, object-oriented code. Understanding how data travels through tensors, how gradients are automatically tracked, and how modules package parameters is the secret to mastering deep learning.
+        </p>
+
+        <div class="intro-grid">
+          <div>
+            <h3 style="margin-bottom: 0.5rem; color: #ffffff;">How Data Flows</h3>
+            <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1rem;">
+              The diagram below shows the typical path of data in a PyTorch program: Raw numbers are wrapped in <strong>Tensors</strong>, operations are recorded by <strong>Autograd</strong> to compute derivatives, and parameters are grouped inside a <strong>Module</strong> to define trainable networks.
+            </p>
+            
+            <div class="trilogy-diagram">
+              <div class="trilogy-box box-tensor">
+                <strong style="color: var(--color-teal); display: block; font-size: 0.85rem;">TENSOR</strong>
+                <span style="font-size: 0.75rem; color: var(--text-muted);">Multi-dimensional array with GPU support</span>
+                <div style="font-family: var(--font-mono); font-size: 0.65rem; color: var(--text-dark); margin-top: 4px;">torch.tensor([[1.0, 2.0]])</div>
+              </div>
+              <div class="trilogy-arrow">&darr;</div>
+              <div class="trilogy-box box-autograd">
+                <strong style="color: var(--color-secondary); display: block; font-size: 0.85rem;">AUTOGRAD</strong>
+                <span style="font-size: 0.75rem; color: var(--text-muted);">Tracks ops to build computation graph</span>
+                <div style="font-family: var(--font-mono); font-size: 0.65rem; color: var(--text-dark); margin-top: 4px;">requires_grad=True</div>
+              </div>
+              <div class="trilogy-arrow">&darr;</div>
+              <div class="trilogy-box box-module">
+                <strong style="color: var(--color-primary); display: block; font-size: 0.85rem;">nn.MODULE</strong>
+                <span style="font-size: 0.75rem; color: var(--text-muted);">Encapsulates model weights and layers</span>
+                <div style="font-family: var(--font-mono); font-size: 0.65rem; color: var(--text-dark); margin-top: 4px;">class Net(nn.Module)</div>
+              </div>
+            </div>
+          </div>
+
+          <div style="display: flex; flex-direction: column; justify-content: center; gap: 1rem;">
+            <div style="background: rgba(15,23,42,0.3); padding: 1.25rem; border-radius: 8px; border: 1px solid var(--border-light);">
+              <h4 style="color: var(--color-teal); font-size: 1rem; margin-bottom: 0.35rem;">1. Tensors: The Raw Material</h4>
+              <p style="font-size: 0.85rem; color: var(--text-muted);">
+                Tensors are the fundamental data structure in PyTorch. They represent vectors, matrices, or higher-dimensional grids. Unlike standard arrays, they can be processed on GPUs to accelerate training.
+              </p>
+            </div>
+            <div style="background: rgba(15,23,42,0.3); padding: 1.25rem; border-radius: 8px; border: 1px solid var(--border-light);">
+              <h4 style="color: var(--color-secondary); font-size: 1rem; margin-bottom: 0.35rem;">2. Autograd: The Mathematical Engine</h4>
+              <p style="font-size: 0.85rem; color: var(--text-muted);">
+                Autograd handles automatic differentiation. By recording all mathematical steps performed on tensors, it can automatically compute derivatives (gradients) using the chain rule during the backward pass.
+              </p>
+            </div>
+            <div style="background: rgba(15,23,42,0.3); padding: 1.25rem; border-radius: 8px; border: 1px solid var(--border-light);">
+              <h4 style="color: var(--color-primary); font-size: 1rem; margin-bottom: 0.35rem;">3. nn.Module: The Structured blueprint</h4>
+              <p style="font-size: 0.85rem; color: var(--text-muted);">
+                The <code>nn.Module</code> base class allows you to define neural network layers, track trainable parameters (weights/biases), and write the forward pass structure in a structured, clean manner.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="intro-cards">
+          <div class="intro-card card-tensor">
+            <h3>Vectors &amp; Matrices</h3>
+            <p>Tensors store weights and inputs. Operations like matrix multiplication form the basis of neural calculations.</p>
+          </div>
+          <div class="intro-card card-autograd">
+            <h3>Chain Rule Tracking</h3>
+            <p>Autograd acts like a tape recorder, measuring how changes in weights affect model prediction errors.</p>
+          </div>
+          <div class="intro-card card-module">
+            <h3>Trainable Layers</h3>
+            <p>Modules combine active functions, state weights, and custom logic to produce the final model architecture.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tab 2: Embeddings & Similarity -->
+    <div id="tab-embeddings" class="tab-panel">
+      <div class="embeddings-layout">
+        <!-- Left: Document Store Panel -->
+        <div class="glass-card" style="display: flex; flex-direction: column; gap: 1rem;">
+          <h2 class="embeddings-title">1. Document Store</h2>
+          <p style="font-size: 0.8rem; color: var(--text-muted);">
+            Edit these documents to see how text changes alter their vector representation and retrieval properties.
+          </p>
+          <div class="doc-list-container" id="document-inputs-list">
+            <!-- Programmatically populated inputs -->
+          </div>
+          <button class="btn-secondary" id="btn-reset-docs" style="font-size: 0.8rem; padding: 0.45rem 1rem; margin-top: 0.5rem;">Reset Default Docs</button>
+        </div>
+
+        <!-- Middle: Retrieval & Embeddings Explorer -->
+        <div class="glass-card" style="display: flex; flex-direction: column; gap: 1rem;">
+          <h2 class="embeddings-title">2. Semantic Retrieval</h2>
+          <p style="font-size: 0.85rem; color: var(--text-muted);">
+            Type a query to embed it and find the most semantically similar documents in the database using <strong>Cosine Similarity</strong>.
+          </p>
+          
+          <div class="query-section">
+            <div class="input-group">
+              <input type="text" id="query-input" placeholder="Type a search query (e.g., neural networks database)..." value="vector databases for machine learning">
+              <button class="btn-primary" id="btn-search">Query</button>
+            </div>
+
+            <!-- Vector representation of the query -->
+            <div class="vector-viewer">
+              <div class="vector-viewer-title">Query Embedding Vector (8-Dimensions)</div>
+              <div class="vector-cells" id="query-vector-cells">
+                <!-- Programmatically populated values -->
+              </div>
+            </div>
+
+            <!-- Ranked matches -->
+            <h3 style="font-size: 1rem; margin-top: 0.5rem; font-weight: 600;">Ranked Search Results (Retrieval Stage)</h3>
+            <div class="ranking-list" id="retrieval-results">
+              <!-- Programmatically populated rankings -->
+            </div>
+          </div>
+
+          <div class="explainer-section embeddings-explainer">
+            <h4>What is RAG (Retrieval-Augmented Generation)?</h4>
+            <ul>
+              <li><strong>Embedding Models</strong> convert chunks of text into multi-dimensional coordinates (vectors).</li>
+              <li><strong>Vector Databases</strong> (like Pinecone or pgvector) store these coordinates for rapid retrieval.</li>
+              <li><strong>Cosine Similarity</strong> calculates the angle between vector coordinates; smaller angles indicate similar semantic meaning.</li>
+              <li>Retrieving the top matches and feeding them to an LLM context is the core of RAG pipeline designs.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Right: 2D Spatial Projection Plot -->
+        <div class="glass-card" style="display: flex; flex-direction: column; justify-content: space-between;">
+          <h2 class="embeddings-title">3. Spatial Map</h2>
+          
+          <div class="canvas-container">
+            <canvas id="embeddings-canvas" width="340" height="340"></canvas>
+            <div class="canvas-caption">2D Circular Radar Projection of the 8D Vector Space</div>
+          </div>
+
+          <p style="font-size: 0.8rem; color: var(--text-muted); line-height: 1.4; margin-top: 1rem;">
+            This radar projection plots documents (numbered dots) and your query (gold star) based on their embedding coordinates. Lines connect the query to the <strong>top 3 matching documents</strong>.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tab 3: Neural Network Training Loop -->
+    <div id="tab-nn" class="tab-panel">
+      <div class="nn-layout">
+        <!-- Controls Header Row -->
+        <div class="nn-controls-card">
+          <div class="control-item">
+            <label for="nn-task-select">Task Mode</label>
+            <select id="nn-task-select">
+              <option value="regression">Sine Wave Fit (Regression)</option>
+              <option value="classification">Decision Boundary (Classification)</option>
+            </select>
+          </div>
+
+          <div class="control-item">
+            <label for="nn-lr-slider">Learning Rate (η): <span id="nn-lr-value" style="font-family: var(--font-mono);">0.05</span></label>
+            <input type="range" id="nn-lr-slider" min="0.01" max="0.3" step="0.01" value="0.05">
+          </div>
+
+          <div class="control-buttons">
+            <button class="btn-primary" id="btn-train-1">Train 1 Step</button>
+            <button class="btn-primary" id="btn-train-50">Train 50 Steps</button>
+            <button class="btn-secondary" id="btn-train-auto">Auto Train (Play)</button>
+            <button class="btn-secondary" id="btn-nn-reset" style="background: rgba(239, 68, 68, 0.1); border-color: rgba(239, 68, 68, 0.3); color: #ef4444;">Reset weights</button>
+          </div>
+        </div>
+
+        <!-- Network details & weights panel -->
+        <div class="glass-card">
+          <h2 class="nn-title" style="margin-bottom: 0.5rem;">4-Step Training Loop: Forward &rarr; Loss &rarr; Backward &rarr; Step</h2>
+          
+          <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 1.5rem; margin-top: 1rem;">
+            <!-- Weights Heatmap -->
+            <div class="weight-explorer">
+              <div class="weight-layer-title" id="weight-layer1-title">W1 Matrix (Hidden Size: 6, Input Size: 1)</div>
+              <div class="weight-grid" id="weight-layer1-grid">
+                <!-- Populate dynamically -->
+              </div>
+              <div class="weight-layer-title" id="weight-layer2-title">W2 Matrix (Output Size: 1, Hidden Size: 6)</div>
+              <div class="weight-grid" id="weight-layer2-grid">
+                <!-- Populate dynamically -->
+              </div>
+            </div>
+
+            <!-- Loop statistics -->
+            <div style="display: flex; flex-direction: column; justify-content: space-between;">
+              <div class="stats-grid">
+                <div class="stat-box" style="grid-column: span 3;">
+                  <div class="stat-label">Current Epoch / Step</div>
+                  <div class="stat-value" id="stat-epoch">0</div>
+                </div>
+                <div class="stat-box" style="grid-column: span 3;">
+                  <div class="stat-label">Loss Value (MSE)</div>
+                  <div class="stat-value value-orange" id="stat-loss">0.00000</div>
+                </div>
+              </div>
+              <p style="font-size: 0.75rem; color: var(--text-dark); margin-top: 0.5rem;">
+                Weights and biases update live on each step. Positive parameters show as teal values, negative parameters show as dim values.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Charts Grid -->
+        <div class="nn-visual-grid">
+          <!-- Canvas 1: Graph plot of function fit / classification boundaries -->
+          <div class="glass-card canvas-container">
+            <h3 style="font-size: 1.1rem; color: #ffffff; align-self: flex-start;" id="nn-plot-title">Model Predictions vs. Target</h3>
+            <canvas id="nn-plot-canvas" width="480" height="300"></canvas>
+            <div class="canvas-caption" id="nn-plot-caption">Solid red line = Neural Net predictions; Dashed line = Target function</div>
+          </div>
+
+          <!-- Canvas 2: Loss History line chart -->
+          <div class="glass-card canvas-container">
+            <h3 style="font-size: 1.1rem; color: #ffffff; align-self: flex-start;">Training Loss History</h3>
+            <canvas id="nn-loss-canvas" width="480" height="300"></canvas>
+            <div class="canvas-caption">Tracks MSE drop as the optimizer adjusts parameters</div>
+          </div>
+        </div>
+
+        <!-- Explainer paragraph -->
+        <div class="explainer-section">
+          <h4>Understanding the training stages:</h4>
+          <ul>
+            <li><strong>FORWARD:</strong> The model computes inputs through layers: <code>x &rarr; Linear + Tanh &rarr; Linear &rarr; Prediction</code>.</li>
+            <li><strong>LOSS:</strong> Evaluates accuracy using MSE loss <code>(Prediction - Target)²</code>.</li>
+            <li><strong>BACKWARD:</strong> Calculates gradients (partial derivatives) of loss w.r.t weights using manual matrix chain-rule backpropagation.</li>
+            <li><strong>STEP:</strong> Moves parameter weights down the gradient slope (Stochastic Gradient Descent): <code>weights -= lr * gradients</code>.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>Building PyTorch projects? Visit your local guides at <a href="file:///Users/venkataswaraswamy/pytorch_learn/lessons">~/pytorch_learn/lessons</a> &bull; Created for educational conceptual learning.</p>
+  </footer>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>
